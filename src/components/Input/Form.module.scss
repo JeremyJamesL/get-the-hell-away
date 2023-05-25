@@ -1,0 +1,49 @@
+@use '../../sass/abstracts/variables' as v;
+
+.form {
+    display: flex;
+    gap: .25rem;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    overflow: hidden;
+    background-color: v.$color-white;
+    border-radius: 1.5rem;
+    padding: 4rem;
+
+    &__group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__input {
+        padding: 2rem;
+        border: none;
+        background-color: v.$color-grey;
+
+        &--first {
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+
+        &--last {
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+    }
+
+    &__label {
+        position: absolute;
+        top: 2.5rem;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 1rem;
+    }
+
+    &__button {
+        background-color: v.$color-primary-light;
+        border: none;
+        color: v.$color-white;
+        padding: 2rem;
+        border-radius: .75rem;
+        font-weight: 600;
+    }
+}

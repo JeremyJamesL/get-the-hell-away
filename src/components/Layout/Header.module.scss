@@ -1,0 +1,31 @@
+@use '../../sass/abstracts/variables' as v;
+
+.header {
+   position: relative;
+   height: 50vh;
+   background-image: linear-gradient(to bottom, rgba(v.$color-primary ,.8), rgba(v.$color-primary-light,0.8));
+   border-bottom-left-radius: 50px;
+   border-bottom-right-radius: 50px;
+   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+   &__text {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 60%;
+   }
+
+   &__sub-text {
+    color: v.$color-white;
+    font-weight: 600;
+    font-size: 2rem;
+   }
+
+   &__search {
+    position: absolute;
+    bottom: -65px;
+    left: 50%;
+    transform: translateX(-50%);
+   }
+
+}

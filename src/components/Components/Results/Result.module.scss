@@ -1,0 +1,130 @@
+@use '../../../sass/abstracts/variables' as v;
+
+.result {
+    position: relative;
+    border-radius: 1.2rem;
+    background-size: cover;
+    min-height: 40rem;
+    background-blend-mode: multiply;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    overflow: hidden;
+
+    resize: both;
+
+    &__overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 0;
+    }
+
+    &__header {
+        display: flex;
+        position: relative;
+        z-index: 1;
+        align-items: center;
+        justify-content: space-between;
+        padding: .5rem 1rem;
+    }
+
+    &__title {
+        color: v.$color-white;
+        font-size: 1.6rem;
+    }
+
+    &__weather {
+        color: v.$color-white;
+        display: flex;
+        align-items: center;
+        font-size: 1.5rem;
+
+        span:first-child {
+            margin-right: 5px;
+        }
+    }
+
+    &__body {
+        padding: 1rem;
+        max-height: 100%;
+        overflow-y: scroll;
+    }
+
+
+    &__footer {
+        background-color: v.$color-white;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+
+    &__prices {
+        list-style: none;
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    &__price {
+        padding: 5px;
+        text-align: center;
+        
+        &--average {
+            grid-column: 1 / span 2;
+            border-bottom: 2px dashed v.$color-grey;
+        }
+
+        &--high {
+            grid-column: 1/2;
+            grid-row: 2;
+            border-right: 2px dashed v.$color-grey;
+        }
+
+        &--low {
+            grid-column: 2/2;
+            grid-row: 2;
+        }
+    }
+
+    &__cost-type {
+        text-transform: uppercase;
+        color: rgba(v.$color-grey-dark, .7);
+        font-size: 1.2rem;
+        letter-spacing: .025em;
+        font-weight: 500;
+    }
+
+    &__cost {
+        span {
+            display: inline-block;
+        }
+
+        &--average {
+            span {
+                color: #0ea5e9;
+            }
+        }
+
+        &--low {
+            span {
+                display: inline-block;
+                transform: rotate(90deg);
+                color: #0e9f6e;
+            }
+        }
+
+        &--high {
+            span {
+                display: inline-block;
+                transform: rotate(-90deg);
+                color: #ec4899;
+            }
+        }
+
+    }
+
+
+
+}

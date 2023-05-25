@@ -1,0 +1,13 @@
+@use '../../sass/abstracts/variables' as  v;
+
+.button {
+    background-color: v.$color-grey;
+    color: v.$color-black;
+    padding: 1rem;
+    font-size: 1.6rem;
+    border-radius: 12px;
+    font-weight: 600;
+    border: 1px solid v.$color-grey-dark;
+    cursor: pointer;
+    font-family: v.$font-headings;
+}

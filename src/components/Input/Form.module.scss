@@ -4,12 +4,13 @@
     display: flex;
     gap: .25rem;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    overflow: hidden;
     background-color: v.$color-white;
     border-radius: 1.5rem;
     padding: 4rem;
 
     &__group {
+        position: relative;
+
         display: flex;
         flex-direction: column;
     }
@@ -32,7 +33,7 @@
 
     &__label {
         position: absolute;
-        top: 2.5rem;
+        top: -1.5rem;
         text-transform: uppercase;
         font-weight: 600;
         font-size: 1rem;
@@ -45,5 +46,26 @@
         padding: 2rem;
         border-radius: .75rem;
         font-weight: 600;
+    }
+
+    &__dropdown {
+        position: absolute;
+        top: 100%;
+        list-style: none;
+        width: 100%;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        background-color: v.$color-grey;
+        font-size: 1rem;
+    }
+
+    &__dropdown-item {
+        padding: 1rem;
+        cursor: pointer;
+        
+        &:not(:last-child){
+            border-bottom: 1px solid v.$color-grey-dark;
+        }    
+
     }
 }

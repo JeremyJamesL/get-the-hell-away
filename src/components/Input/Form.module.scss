@@ -66,6 +66,15 @@
         &:not(:last-child){
             border-bottom: 1px solid v.$color-grey-dark;
         }    
+    }
 
+    &__input-clear {
+        color: v.$color-grey-dark;
+        background-color: transparent;
+        border: none;
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        transform: translateY(-50%);
     }
 }

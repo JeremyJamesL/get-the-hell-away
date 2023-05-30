@@ -1,26 +1,47 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import s from './Form.module.scss';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { selectedFlightDataActions } from '../../store/slice-selected-flight-data';
+
 function Form() {
+  // Vars
+  const dispatch = useDispatch();
+
+  const selectedFromCities = useSelector(state => {return state.selectedFlightData.from;})
   const [nameInput, updateNameInput] = useState('');
   const [citiesList, updateCitiesList] = useState([]);
-  const [selectedCities, updateSelectedCities] = useState([]);
+  const [inputIsFrozen, updateInputIsFrozen] = useState(false);
+  const fromRef = useRef();
   
-  console.log(selectedCities);
+  console.log(selectedFromCities, 'selected from cities');
 
+  // Handlers
   const handleCitySelect = (e) => {
-    updateSelectedCities(current => [...current, `${e.target.dataset.city}, ${e.target.dataset.countryCode}`])
+    const newCity = {
+        cityName: e.target.dataset.city,
+        countryCode: e.target.dataset.countryCode,
+    }
+    dispatch(selectedFlightDataActions.addCityFrom(newCity));
+    updateInputIsFrozen(true);
+    fromRef.current.value = '';
+    updateCitiesList([]);
   }
 
+  const handleInputClear = () => {
+    updateInputIsFrozen(false);
+  }
+
+  // Elements
   const citiesDropdown = () => {
     return citiesList.map((city) => {
         return (
             <li className={s['form__dropdown-item']} onClick={handleCitySelect} data-city={city.city} data-country-code={city.countryCode}>{city.city}, {city.country}</li>
         )
     })
-
   }
 
+  // API calls
   const retrieveCities = (n) => {
     if(n.length === 0) {
         updateCitiesList([]);
@@ -34,12 +55,14 @@ function Form() {
     })
     .then(response => response.json())
     .then(result => {
+        console.log(result)
         const newArr = result.locations.map((el) => {
             return {
                 id: el.city.id,
                 city: el.city.name,
                 country: el.city.country.name,
-                countryCode: el.city.country.code
+                countryCode: el.city.country.code,
+                airportCode: el.code,
             }
         })
 
@@ -64,7 +87,14 @@ function Form() {
     <form className={s.form}>
         <div className={s['form__group']}>
             <label htmlFor="" className={s['form__label']}>From</label>
-            <input type="text" className={`${s['form__input']} ${s['form__input--first']}`} onChange={(e) => updateNameInput(e.target.value)}/>
+            
+            {inputIsFrozen && <button className={s['form__input-clear']} onClick={handleInputClear}>x</button>}
+            
+            {inputIsFrozen &&<input type="text" value={`${selectedFromCities.cityName}, ${selectedFromCities.countryCode}`} className={`${s['form__input']} ${s['form__input--first']}`} readOnly="true" />}
+
+            {!inputIsFrozen &&<input type="text" className={`${s['form__input']} ${s['form__input--first']}`} onChange={(e) => updateNameInput(e.target.value)} ref={fromRef}/>}
+
+
             <ul className={s['form__dropdown']}>
                 {citiesDropdown()}
             </ul>
